@@ -9,9 +9,9 @@ import { IMAGES } from "@/lib/images";
 import { homeFaqSchema, projectOfferSchema, webPageSchema } from "@/lib/schema";
 import styles from "./page.module.css";
 
-const PAGE_TITLE = "The Enclave Milton | New Freehold Townhomes from $599,990";
+const PAGE_TITLE = "The Enclave Milton | Freehold Townhomes by Sundial Homes";
 const PAGE_DESCRIPTION =
-  "Register for floor plans and pricing at The Enclave — new freehold townhomes in southeast Milton, Ontario by Sundial Homes. 15 models, no monthly maintenance fees, occupancy 2027. From $599,990.";
+  "The Enclave Milton by Sundial Homes — freehold townhomes in southeast Milton, Ontario. 15 models, no monthly maintenance fees, occupancy 2027. From $599,990.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL },
   keywords: [
     "The Enclave Milton",
+    "The Enclave",
     "new townhomes Milton Ontario",
     "freehold townhomes Milton",
     "Sundial Homes Milton",
@@ -101,7 +102,7 @@ export default function HomePage() {
               {project.city} · By {project.builder}
             </p>
             <h1 id="hero-heading">
-              New townhomes in Milton — <span className={styles.heroAccent}>The Enclave</span>
+              The Enclave Milton — <span className={styles.heroAccent}>Freehold Townhomes</span>
             </h1>
             <p className={styles.tagline}>
               Freehold townhomes in southeast Milton with no monthly maintenance fees. Register
