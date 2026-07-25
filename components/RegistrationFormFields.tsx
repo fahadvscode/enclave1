@@ -1,7 +1,9 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { getRegistrationModelOptions } from "@/lib/registration-options";
+import { GOOGLE_ADS_LEAD_THANK_YOU_PATH } from "@/lib/google-ads";
 import { REGISTRATION_FORM_NAME } from "@/lib/registration-form";
 import { siteData } from "@/lib/floor-plans";
 import styles from "./RegistrationFormFields.module.css";
@@ -25,7 +27,8 @@ export function RegistrationFormFields({
   onSuccess,
   submitLabel,
 }: RegistrationFormFieldsProps) {
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const router = useRouter();
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const modelOptions = getRegistrationModelOptions();
 
@@ -61,28 +64,16 @@ export function RegistrationFormFields({
         throw new Error(body.error ?? "Registration failed. Please try again.");
       }
 
-      setStatus("success");
+      setStatus("idle");
       form.reset();
       onSuccess?.();
+      router.push(
+        `${GOOGLE_ADS_LEAD_THANK_YOU_PATH}?source=${encodeURIComponent(source)}`
+      );
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong.");
     }
-  }
-
-  if (status === "success") {
-    return (
-      <div className={styles.success} role="status">
-        <div className={styles.successIcon} aria-hidden="true">
-          ✓
-        </div>
-        <h3>You&apos;re on the list</h3>
-        <p>
-          Floor plan PDFs and current pricing for The Enclave Milton are on the way.
-          Check your inbox and spam folder within a few minutes.
-        </p>
-      </div>
-    );
   }
 
   const label =
